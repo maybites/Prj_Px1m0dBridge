@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="ch.maybites.px1m0d.plug.collection.liveA.PlgDevice" name="Device.NatebuProxy">
+    	<parameter>
+    		<display>
+    			<icon path="ch.maybites.px1m0d.plug.drawing.effects.icons.IconBasic">
+    				<color red="50" green="50" blue="50" alpha="255" />
+    				<label>NatebuProxy</label>
+    				<labelPipe0>*0*</labelPipe0>
+    				<labelPipe1>*1*</labelPipe1>
+    				<labelPipe2>*2*</labelPipe2>
+    				<labelPipe3>*3*</labelPipe3>
+    				<labelPipe4>*4*</labelPipe4>
+    				<labelPipe5>*5*</labelPipe5>
+    				<labelPipe6>*6*</labelPipe6>
+    				<labelPipe7>*7*</labelPipe7>
+    				<labelPipe8>*8*</labelPipe8>
+    			</icon>
+    		</display>
+			<jobs>
+				<job>
+					<message trigger="NatebuIsManipulated">
+						<osc ipAddress="world" addrPattern="/natebu/centralButton">
+							<addOscInt>if(NatebuCentralButtonIsPressed == true, 1, 0)</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuIsManipulated">
+						<osc ipAddress="world" addrPattern="/natebu/leftSelector">
+							<addOscInt>NatebuSelectorLeft</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuIsManipulated">
+						<osc ipAddress="world" addrPattern="/natebu/rightSelector">
+							<addOscInt>NatebuSelectorRight</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuIsManipulated">
+						<osc ipAddress="world" addrPattern="/natebu/leftPoti">
+							<addOscInt>NatebuPotiLeft</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuIsManipulated">
+						<osc ipAddress="world" addrPattern="/natebu/rightPoti">
+							<addOscInt>NatebuPotiRight</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuIsManipulated">
+						<osc ipAddress="world" addrPattern="/natebu/bottomSwitches">
+							<addOscInt>NatebuBottomSwitch00</addOscInt>
+							<addOscInt>NatebuBottomSwitch01</addOscInt>
+							<addOscInt>NatebuBottomSwitch02</addOscInt>
+							<addOscInt>NatebuBottomSwitch03</addOscInt>
+							<addOscInt>NatebuBottomSwitch04</addOscInt>
+							<addOscInt>NatebuBottomSwitch05</addOscInt>
+							<addOscInt>NatebuBottomSwitch06</addOscInt>
+							<addOscInt>NatebuBottomSwitch07</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuIsManipulated">
+						<osc ipAddress="world" addrPattern="/natebu/rightSwitches">
+							<addOscInt>NatebuRightSwitch00</addOscInt>
+							<addOscInt>NatebuRightSwitch01</addOscInt>
+							<addOscInt>NatebuRightSwitch02</addOscInt>
+							<addOscInt>NatebuRightSwitch03</addOscInt>
+							<addOscInt>NatebuRightSwitch04</addOscInt>
+							<addOscInt>NatebuRightSwitch05</addOscInt>
+							<addOscInt>NatebuRightSwitch06</addOscInt>
+							<addOscInt>NatebuRightSwitch07</addOscInt>
+						</osc>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+    </plug>
+ </plugTree>

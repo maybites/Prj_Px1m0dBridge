@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="ch.maybites.px1m0d.plug.collection.liveA.PlgAutoPiper" name="AutoPiper.Default">
+		<parameter>
+     		<display>
+    			<icon path="ch.maybites.px1m0d.plug.drawing.effects.icons.IconBasic">
+    				<color red="255" green="0" blue="255" alpha="255" />
+    				<label>AutoPiper</label>
+    				<labelPipe0>*0*</labelPipe0>
+    				<labelPipe1>*1*</labelPipe1>
+    				<labelPipe2>*2*</labelPipe2>
+    				<labelPipe3>*3*</labelPipe3>
+    				<labelPipe4>*4*</labelPipe4>
+    				<labelPipe5>*5*</labelPipe5>
+    				<labelPipe6>*6*</labelPipe6>
+    				<labelPipe7>*7*</labelPipe7>
+    				<labelPipe8>*8*</labelPipe8>
+    			</icon>
+    		</display>
+ 			<jobs>
+				<job 	id="0" 
+						name="AutoPiperJobNumber0"
+						description="sends pipe message if natebu message value has changed" >
+					<message trigger="LocalNatebuValueIsChanged">
+						<pipe channel="0">
+							<value type="abs">LocalNatebuValue</value>
+						</pipe>
+					</message>
+				</job>
+				<job 	id="1" 
+						name="AutoPiperJobNumber1"
+						description="sends pipe message if natebu message value has changed" >
+					<message trigger="LocalNatebuValueIsChanged">
+						<pipe channel="2">
+							<value type="abs">LocalNatebuValue</value>
+						</pipe>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+	</plug>
+</plugTree>

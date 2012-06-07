@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<setup xmlns="http://maybites.ch/px1m0d/settingsSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/settingsSchema file:./data/schemas/settings.xsd">
+     
+	<property name="default" value="novalue"/>
+</setup>

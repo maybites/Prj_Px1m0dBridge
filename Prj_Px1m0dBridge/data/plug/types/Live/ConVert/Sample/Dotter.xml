@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="ch.maybites.px1m0d.plug.collection.liveA.PlgChainStart" name="Dotter">
+    	<parameter>
+    		<display>
+    			<icon path="ch.maybites.px1m0d.plug.drawing.effects.icons.IconBasic">
+    				<color red="255" green="0" blue="0" alpha="255" />
+    				<label>Dotter</label>
+    				<labelPipe0>TrackVol</labelPipe0>
+    				<labelPipe1>*</labelPipe1>
+    				<labelPipe2>*</labelPipe2>
+    				<labelPipe3>*</labelPipe3>
+    				<labelPipe4>*</labelPipe4>
+    				<labelPipe5>*</labelPipe5>
+    				<labelPipe6>*</labelPipe6>
+    				<labelPipe7>*</labelPipe7>
+    				<labelPipe8>TrackBal</labelPipe8>
+    			</icon>
+    		</display>
+			<jobs>
+				<job name="">
+					<message trigger="LocalSwitchIsToggled and LocalSwitchIsOn">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LocalPlugName+')/clip_slots/'+(LocalDirection-1)</addressPattern>
+							<addOscString>'call'</addOscString>
+							<addOscString>'fire'</addOscString>
+						</osc>
+					</message>
+				</job>
+				<job name="">
+					<message trigger="LocalSwitchIsToggled and LocalSwitchIsOff">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LocalPlugName+')/clip_slots/'+(LocalDirection-1)</addressPattern>
+							<addOscString>'call'</addOscString>
+							<addOscString>'stop'</addOscString>
+						</osc>
+					</message>
+				</job>
+				<job name="">
+					<message trigger="LocalPlugJustDestroyed">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LocalPlugName+')/clip_slots/'+(LocalDirection-1)</addressPattern>
+							<addOscString>'call'</addOscString>
+							<addOscString>'stop'</addOscString>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue00HasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LocalPlugName+')/mixer_device/volume'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscFloat>map(LocalPipeValue00, 0, 255, 0, 1)</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue08HasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LocalPlugName+')/mixer_device/panning'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscFloat>map(LocalPipeValue08, 0, 255, -1, 1)</addOscInt>
+						</osc>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+    </plug>
+ </plugTree>

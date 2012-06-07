@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="data/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/localLibrary"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Processing1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MaybitesCore"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingExt_gestaltP5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingExt_controlP5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingExt_oscP5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingExt_proXML"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/libX_Expression"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="ch.maybites.px1m0d.plug.collection.liveA.PlgDevice" name="Device.LinkProxy">
+    	<parameter>
+    		<display>
+    			<icon path="ch.maybites.px1m0d.plug.drawing.effects.icons.IconBasic">
+    				<color red="255" green="255" blue="0" alpha="255" />
+    				<label>LinkProxy</label>
+    				<labelPipe0>*0*</labelPipe0>
+    				<labelPipe1>*1*</labelPipe1>
+    				<labelPipe2>*2*</labelPipe2>
+    				<labelPipe3>*3*</labelPipe3>
+    				<labelPipe4>*4*</labelPipe4>
+    				<labelPipe5>*5*</labelPipe5>
+    				<labelPipe6>*6*</labelPipe6>
+    				<labelPipe7>*7*</labelPipe7>
+    				<labelPipe8>*8*</labelPipe8>
+    			</icon>
+    		</display>
+			<jobs>
+				<job>
+					<message trigger="LocalPlugIsLinked && LocalButtonIsToggled && LocalButtonIsReleased">
+						<osc ipAddress="world" addrPattern="/link/LinkSocketID">
+							<addOscInt>LinkSocketID</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPlugIsLinked && LocalButtonIsToggled && LocalButtonIsReleased">
+						<osc ipAddress="world" addrPattern="/link/LinkPlugID">
+							<addOscInt>LinkPlugID</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPlugIsLinked && LocalButtonIsToggled && LocalButtonIsReleased">
+						<osc ipAddress="world" addrPattern="/link/LinkDirection">
+							<addOscInt>LinkDirection</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPlugIsLinked && LocalButtonIsToggled && LocalButtonIsReleased">
+						<osc ipAddress="world" addrPattern="/link/LinkXDirection">
+							<addOscInt>LinkXDirection</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPlugIsLinked && LocalButtonIsToggled && LocalButtonIsReleased">
+						<osc ipAddress="world" addrPattern="/link/LinkYDirection">
+							<addOscInt>LinkYDirection</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPlugIsLinked && LocalButtonIsToggled && LocalButtonIsReleased">
+						<osc ipAddress="world" addrPattern="/link/LinkXPos">
+							<addOscInt>LinkXPos</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPlugIsLinked && LocalButtonIsToggled && LocalButtonIsReleased">
+						<osc ipAddress="world" addrPattern="/link/LinkYPos">
+							<addOscInt>LinkYPos</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPlugIsLinked && LocalButtonIsToggled && LocalButtonIsReleased">
+						<osc ipAddress="world" addrPattern="/link/LinkPlugIsPlugged">
+							<addOscInt>if(LinkPlugIsPlugged == true, 1, 0)</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPlugIsLinked && LocalButtonIsToggled && LocalButtonIsReleased">
+						<osc ipAddress="world" addrPattern="/link/LinkPlugIsUnPLugged">
+							<addOscInt>if(LinkPlugIsUnPLugged == true, 1, 0)</addOscInt>
+						</osc>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+    </plug>
+ </plugTree>

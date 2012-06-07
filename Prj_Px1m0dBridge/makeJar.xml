@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 	<project name="px1m0d" default="default" basedir=".">
+		<description>
+ 		======================================================================================
+			Processing.org -> Eclipse Ant Builder for Applets and Applications
+
+				By Martin Fröhlich (2008)
+ 		
+ 		======================================================================================
+ 		Ajust the following properties according to your personal setup:
+ 			
+ 			workspace.location
+ 			processing.dir
+ 			project.name
+ 		
+	 		applet.height
+	 		applet.width
+ 		
+ 		if you include external libraries you have to add them in the classpaths as well:
+ 			win.classpath
+ 			linux.classpath
+ 			osx.classpath
+ 				
+ 		======================================================================================
+ 		</description>
+ 	    <property name="workspace.location" value="/Users/maybites/Arbeiten/programmierung/eclipse"/>
+     	<property name="processing.dir" value="/Applications/Processing 0135"/>
+        <property name="project.name" value="Px1m0d"/>
+ 		<property name="project.jar.name" value="${project.name}.jar"/>
+
+ 	 	<property name="applet.height" value="480"/>
+ 	 	<property name="applet.width" value="640"/>
+
+ 		<property name="win.classpath" value="${project.jar.name},core.jar,candy.jar,com.jar,dxf.jar,dxfviewer.jar,itext.jar,javascript.jar,jogl-natives-linux-i586.jar,jogl-natives-windows-i586.jar,jogl-natives-macosx-universal.jar,jogl-natives-macosx-ppc.jar,jogl.jar,net.jar,opengl.jar,oscP5.jar,pdf.jar,prohtml.jar,RXTXcomm.jar,serial.jar,serializer.jar,SpringGUI.jar,video.jar,xml.jar"/>
+ 	 	<property name="linux.classpath" value="$$APPDIR/lib/${project.jar.name}:$$APPDIR/lib/core.jar:$$APPDIR/lib/candy.jar:$$APPDIR/lib/com.jar:$$APPDIR/lib/dxf.jar:$$APPDIR/lib/dxfviewer.jar:$$APPDIR/lib/itext.jar:$$APPDIR/lib/javascript.jar:$$APPDIR/lib/jogl-natives-linux-i586.jar:$$APPDIR/lib/jogl-natives-windows-i586.jar:$$APPDIR/lib/jogl-natives-macosx-universal.jar:$$APPDIR/lib/jogl-natives-macosx-ppc.jar:$$APPDIR/lib/jogl.jar:$$APPDIR/lib/net.jar:$$APPDIR/lib/opengl.jar:$$APPDIR/lib/oscP5.jar:$$APPDIR/lib/pdf.jar:$$APPDIR/lib/prohtml.jar:$$APPDIR/lib/RXTXcomm.jar:$$APPDIR/lib/serial.jar:$$APPDIR/lib/serializer.jar:$$APPDIR/lib/SpringGUI.jar:$$APPDIR/lib/video.jar:$$APPDIR/lib/xml.jar"/>
+ 	 	<property name="osx.classpath" value="$$JAVAROOT/${project.jar.name}:$$JAVAROOT/core.jar:$$JAVAROOT/candy.jar:$$JAVAROOT/com.jar:$$JAVAROOT/dxf.jar:$$JAVAROOT/dxfviewer.jar:$$JAVAROOT/itext.jar:$$JAVAROOT/javascript.jar:$$JAVAROOT/jogl-natives-linux-i586.jar:$$JAVAROOT/jogl-natives-windows-i586.jar:$$JAVAROOT/jogl-natives-macosx-universal.jar:$$JAVAROOT/jogl-natives-macosx-ppc.jar:$$JAVAROOT/jogl.jar:$$JAVAROOT/net.jar:$$JAVAROOT/opengl.jar:$$JAVAROOT/oscP5.jar:$$JAVAROOT/pdf.jar:$$JAVAROOT/prohtml.jar:$$JAVAROOT/RXTXcomm.jar:$$JAVAROOT/serial.jar:$$JAVAROOT/serializer.jar:$$JAVAROOT/SpringGUI.jar:$$JAVAROOT/video.jar:$$JAVAROOT/xml.jar"/>
+
+<!--
+==================================================================
+	DO NOT CHANGE BELOW UNLESS YOU KNOW WHAT YOU ARE DOIN
+==================================================================-->		
+    	<property name="project.location" value="${workspace.location}/${project.name}"/>
+    	<property name="project.build.dir" value="${project.location}/build"/>
+     	
+     	<property name="template.dir" value="${project.location}/templates"/>
+ 	   	<property name="template.skeleton.loc" value="${template.dir}/skeleton.app"/>
+ 	   	<property name="template.plist.loc" value="${template.dir}/template.plist"/>
+ 		
+ 	   	<property name="osx.application.loc" value="${project.build.dir}/application.macosx"/>
+ 	   	<property name="osx.application.app.loc" value="${osx.application.loc}/${project.name}.app"/>
+  	    <property name="osx.application.Info.plist.loc" value="${osx.application.app.loc}/Contents/Info.plist"/>
+ 	   	<property name="osx.application.Java.dir" value="${osx.application.app.loc}/Contents/Resources/Java"/>
+ 
+ 	   	<property name="win.application.loc" value="${project.build.dir}/application.windows"/>
+ 	 	<property name="win.application.lib.loc" value="${win.application.loc}/lib"/>
+
+ 	 	<property name="linux.application.loc" value="${project.build.dir}/application.linux"/>
+ 	 	<property name="linux.application.lib.loc" value="${linux.application.loc}/lib"/>
+
+ 	 	<property name="applet.loc" value="${project.build.dir}/applet"/>
+ 			
+		<mkdir dir="${project.build.dir}"/>
+
+		<target name ="default" description="check conditions">
+			<condition property="temlate.is.present">
+				<available file="${template.dir}" type="dir"/>
+			</condition>
+			<antcall target="template.exist"/>
+			<antcall target="template.exist.error"/>
+		</target>
+ 		
+ 		<target name="template.exist" if="temlate.is.present">
+			<condition property="osx.temlate.is.present">
+				<available file="${template.skeleton.loc}" type="dir"/>
+			</condition>
+			<antcall target="osx.template.move"/>
+			<condition property="osx.app.is.present">
+				<available file="${osx.application.app.loc}" type="dir"/>
+			</condition>
+			<antcall target="osx.app.build"/>
+			<antcall target="win.app.build"/>
+			<antcall target="linux.app.build"/>
+			<antcall target="applet.build"/>
+			<antcall target="osx.app.build.error"/>
+ 		</target>
+
+ 		<target name="osx.template.move" if="osx.temlate.is.present">
+ 	 		<move todir="${osx.application.app.loc}">
+ 	 		    <fileset dir="${template.skeleton.loc}"/>
+ 	 		</move>
+ 	 		<delete dir="${template.skeleton.loc}"/>
+ 		</target>
+ 		
+ 		<target name="osx.app.build" if="osx.app.is.present">
+ 	 		<delete file="${osx.application.Info.plist.loc}"/>
+ 	 		<copy file="${template.plist.loc}" tofile="${osx.application.Info.plist.loc}"/>
+ 	 		<replaceregexp file="${osx.application.Info.plist.loc}"
+ 	 		                         match="@@classpath@@"
+ 	 		                         replace="${osx.classpath}"
+ 	 		                         byline="true"/>
+ 	 		<replaceregexp file="${osx.application.Info.plist.loc}"
+ 	 		                         match="@@sketch@@"
+ 	 		                         replace="${project.name}"
+ 	 		                         byline="true"/>
+ 	 		<delete dir="${osx.application.Java.dir}"/>
+ 			<mkdir dir="${osx.application.Java.dir}"/>
+ 	 		<copy todir="${osx.application.Java.dir}" flatten="true">
+ 	 		    <fileset dir="${processing.dir}/libraries">
+	 		    	<include name="**/*.jar"/>
+	 		    	<include name="**/*.jnilib"/>
+ 	 		    </fileset>
+ 	 		    <file file="${processing.dir}/lib/core.jar"/>
+ 			</copy>
+			<jar jarfile="${osx.application.Java.dir}/${project.jar.name}">
+		        <fileset dir="bin">
+		        	<include name="**/*.class"/>
+		        </fileset>
+			    <manifest>
+      				<attribute name="Built-By" value="${user.name}"/>
+      				<attribute name="Main-Class" value="${project.name}"/>
+    			</manifest>
+			</jar>		
+ 	 		<delete dir="${osx.application.loc}/source"/>
+ 	 		<mkdir dir="${osx.application.loc}/source"/>
+ 	 		<copy todir="${osx.application.loc}/source" flatten="true">
+ 	 		    <fileset dir="${project.location}/src">
+	 		    	<include name="**/*.java"/>
+ 	 		    </fileset>
+ 			</copy>
+  		</target>
+
+ 		<target name="win.app.build">
+ 	 		<delete dir="${win.application.loc}"/>
+ 	 		<mkdir dir="${win.application.loc}"/>
+ 	 		<copy file="${template.dir}/application.exe" todir="${win.application.loc}"/>
+ 	 		<copy todir="${win.application.lib.loc}" flatten="true">
+ 	 		    <fileset dir="${processing.dir}/libraries">
+	 		    	<include name="**/*.jar"/>
+ 	 		    </fileset>
+ 	 		    <file file="${processing.dir}/lib/core.jar"/>
+ 			</copy>
+ 	 		<copy todir="${win.application.loc}" flatten="true">
+ 	 		    <fileset dir="${processing.dir}/libraries">
+	 		    	<include name="**/*.dll"/>
+ 	 		    </fileset>
+ 			</copy>
+	    	<echo file="${win.application.lib.loc}/args.txt" append="false">${project.name}
+${win.classpath}
+	    	</echo>
+			<jar jarfile="${win.application.lib.loc}/${project.jar.name}">
+		        <fileset dir="bin">
+		        	<include name="**/*.class"/>
+		        </fileset>
+			    <manifest>
+      				<attribute name="Built-By" value="${user.name}"/>
+      				<attribute name="Main-Class" value="${project.name}"/>
+    			</manifest>
+			</jar>		
+ 	 		<delete dir="${win.application.loc}/source"/>
+ 	 		<mkdir dir="${win.application.loc}/source"/>
+ 	 		<copy todir="${win.application.loc}/source" flatten="true">
+ 	 		    <fileset dir="${project.location}/src">
+	 		    	<include name="**/*.java"/>
+ 	 		    </fileset>
+ 			</copy>
+  		</target>
+    				
+ 		<target name="linux.app.build">
+ 	 		<delete dir="${linux.application.loc}"/>
+ 	 		<mkdir dir="${linux.application.loc}"/>
+ 	 		<copy file="${template.dir}/application.exe" tofile="${linux.application.loc}"/>
+ 	 		<copy todir="${linux.application.lib.loc}" flatten="true">
+ 	 		    <fileset dir="${processing.dir}/libraries">
+	 		    	<include name="**/*.jar"/>
+ 	 		    </fileset>
+ 	 		    <file file="${processing.dir}/lib/core.jar"/>
+ 			</copy>
+ 	 		<copy todir="${linux.application.loc}" flatten="true">
+ 	 		    <fileset dir="${processing.dir}/libraries">
+	 		    	<include name="**/*.so"/>
+ 	 		    </fileset>
+ 			</copy>
+	    	<echo file="${linux.application.loc}/${project.name}" append="false">#!/bin/sh
+
+APPDIR=$$(dirname "$$0")
+java  -Djava.library.path="$$APPDIR" -cp "${linux.classpath}" ${project.name}
+
+	    	</echo>
+			<jar jarfile="${linux.application.lib.loc}/${project.jar.name}">
+		        <fileset dir="bin">
+		        	<include name="**/*.class"/>
+		        </fileset>
+			    <manifest>
+      				<attribute name="Built-By" value="${user.name}"/>
+      				<attribute name="Main-Class" value="${project.name}"/>
+    			</manifest>
+			</jar>		
+ 	 		<delete dir="${linux.application.loc}/source"/>
+ 	 		<mkdir dir="${linux.application.loc}/source"/>
+ 	 		<copy todir="${linux.application.loc}/source" flatten="true">
+ 	 		    <fileset dir="${project.location}/src">
+	 		    	<include name="**/*.java"/>
+ 	 		    </fileset>
+ 			</copy>
+  		</target>
+
+ 		<target name="applet.build">
+ 	 		<delete dir="${applet.loc}"/>
+ 	 		<mkdir dir="${applet.loc}"/>
+ 	 		<copy file="${processing.dir}/lib/loading.gif" todir="${applet.loc}"/>
+ 	 		<copy file="${template.dir}/applet.html" tofile="${applet.loc}/applet.html"/>
+ 	 		<copy file="${template.dir}/applet-opengl.html" tofile="${applet.loc}/applet-opengl.html"/>
+ 	 		<replaceregexp file="${applet.loc}/applet-opengl.html"
+ 	 		                         match="@@archive@@"
+ 	 		                         replace="${win.classpath}"
+ 	 		                         byline="true"/>
+ 	 		<replaceregexp file="${applet.loc}/applet-opengl.html"
+ 	 		                         match="@@sketch@@"
+ 	 		                         replace="${project.name}"
+ 	 		                         byline="true"/>
+ 	 		<replaceregexp file="${applet.loc}/applet-opengl.html"
+ 	 		                         match="@@source@@"
+ 	 		                         replace="&lt;a href=source >source&lt;/a>"
+ 	 		                         byline="true"/>
+ 	 		<replaceregexp file="${applet.loc}/applet-opengl.html"
+ 	 		                         match="@@width@@"
+ 	 		                         replace="${applet.width}"
+ 	 		                         byline="true"/>
+ 	 		<replaceregexp file="${applet.loc}/applet-opengl.html"
+ 	 		                         match="@@height@@"
+ 	 		                         replace="${applet.height}"
+ 	 		                         byline="true"/> 	 		
+			<replaceregexp file="${applet.loc}/applet.html"
+ 	 		                         match="@@archive@@"
+ 	 		                         replace="${win.classpath}"
+ 	 		                         byline="true"/>
+ 	 		<replaceregexp file="${applet.loc}/applet.html"
+ 	 		                         match="@@sketch@@"
+ 	 		                         replace="${project.name}"
+ 	 		                         byline="true"/>
+ 	 		<replaceregexp file="${applet.loc}/applet.html"
+ 	 		                         match="@@source@@"
+ 	 		                         replace="&lt;a href=source >source&lt;/a>"
+ 	 		                         byline="true"/>
+ 	 		<replaceregexp file="${applet.loc}/applet.html"
+ 	 		                         match="@@width@@"
+ 	 		                         replace="${applet.width}"
+ 	 		                         byline="true"/>
+ 	 		<replaceregexp file="${applet.loc}/applet.html"
+ 	 		                         match="@@height@@"
+ 	 		                         replace="${applet.height}"
+ 	 		                         byline="true"/>
+ 	 		<copy todir="${applet.loc}" flatten="true">
+ 	 		    <fileset dir="${processing.dir}/libraries">
+	 		    	<include name="**/*.jar"/>
+ 	 		    </fileset>
+ 	 		    <file file="${processing.dir}/lib/core.jar"/>
+ 			</copy>
+			<jar jarfile="${applet.loc}/${project.jar.name}">
+		        <fileset dir="bin">
+		        	<include name="**/*.class"/>
+		        </fileset>
+			    <manifest>
+      				<attribute name="Built-By" value="${user.name}"/>
+      				<attribute name="Main-Class" value="${project.name}"/>
+    			</manifest>
+			</jar>		
+ 	 		<delete dir="${applet.loc}/source"/>
+ 	 		<mkdir dir="${applet.loc}/source"/>
+ 	 		<copy todir="${applet.loc}/source" flatten="true">
+ 	 		    <fileset dir="${project.location}/src">
+	 		    	<include name="**/*.java"/>
+ 	 		    </fileset>
+ 			</copy>
+  		</target>
+
+ 		
+ 		<target name="template.exist.error" unless="temlate.is.present">
+            <echo>BUILD FAILS: </echo>
+            <echo>----> The directory 'templates' must be imported from 'Processing 0xxx/lib/export'</echo>
+            <echo>----> ${template.dir} </echo>
+ 		</target>
+ 
+ 		<target name="osx.app.build.error" unless="osx.app.is.present">
+            <echo>BUILD FAILS: </echo>
+            <echo>----> The directory 'templates' must be reimported from 'Processing 0xxx/lib/export'</echo>
+            <echo>----> ${template.dir} </echo>
+ 		</target>	
+	</project>
+ 

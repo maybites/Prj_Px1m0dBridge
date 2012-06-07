@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="ch.maybites.px1m0d.plug.collection.liveA.PlgChainLink" name="QuickTeacherOne">
+    	<parameter>
+    		<display>
+    			<icon path="ch.maybites.px1m0d.plug.drawing.effects.icons.IconBasic">
+    				<color red="0" green="255" blue="255" alpha="255" />
+    				<label>QuickTeacherOne</label>
+    				<labelPipe0>Ch00-CC00</labelPipe0>
+    				<labelPipe1>Ch00-CC01</labelPipe1>
+    				<labelPipe2>Ch00-CC02</labelPipe2>
+    				<labelPipe3>Ch00-CC03</labelPipe3>
+    				<labelPipe4>Ch00-CC04</labelPipe4>
+    				<labelPipe5>Ch00-CC05</labelPipe5>
+    				<labelPipe6>Ch00-CC06</labelPipe6>
+    				<labelPipe7>Ch00-CC07</labelPipe7>
+    				<labelPipe8>Ch00-CC08</labelPipe8>
+    			</icon>
+    		</display>
+			<jobs>
+				<job>
+					<message trigger="LocalPlugJustCreated">
+						<osc ipAddress="world">
+							<addressPattern>'/plug/name'</addressPattern>
+							<addOscString>''+LocalPlugName</addOscString>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPlugGotLinked">
+						<osc ipAddress="world">
+							<addressPattern>'/plug/linkname'</addressPattern>
+							<addOscString>''+LinkPlugName</addOscString>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue00HasChanged and LocalSwitchIsOn">
+						<midi>
+							<status type="ControlChange" channel="0" />
+							<data>0</data>
+							<data>LocalPipeValue00 / 2</data>
+						</midi>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue01HasChanged and LocalSwitchIsOn">
+						<midi>
+							<status type="ControlChange" channel="0" />
+							<data>1</data>
+							<data>LocalPipeValue01 / 2</data>
+						</midi>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue02HasChanged and LocalSwitchIsOn">
+						<midi>
+							<status type="ControlChange" channel="0" />
+							<data>2</data>
+							<data>LocalPipeValue02 / 2</data>
+						</midi>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue03HasChanged and LocalSwitchIsOn">
+						<midi>
+							<status type="ControlChange" channel="0" />
+							<data>3</data>
+							<data>LocalPipeValue03 / 2</data>
+						</midi>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue04HasChanged and LocalSwitchIsOn">
+						<midi>
+							<status type="ControlChange" channel="0" />
+							<data>4</data>
+							<data>LocalPipeValue04 / 2</data>
+						</midi>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue05HasChanged and LocalSwitchIsOn">
+						<midi>
+							<status type="ControlChange" channel="0" />
+							<data>5</data>
+							<data>LocalPipeValue05 / 2</data>
+						</midi>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue06HasChanged and LocalSwitchIsOn">
+						<midi>
+							<status type="ControlChange" channel="0" />
+							<data>6</data>
+							<data>LocalPipeValue06 / 2</data>
+						</midi>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue07HasChanged and LocalSwitchIsOn">
+						<midi>
+							<status type="ControlChange" channel="0" />
+							<data>7</data>
+							<data>LocalPipeValue07 / 2</data>
+						</midi>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue08HasChanged and LocalSwitchIsOn">
+						<midi>
+							<status type="ControlChange" channel="0" />
+							<data>8</data>
+							<data>LocalPipeValue08 / 2</data>
+						</midi>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+    </plug>
+ </plugTree>

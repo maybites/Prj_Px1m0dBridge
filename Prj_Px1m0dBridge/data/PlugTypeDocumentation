@@ -1,0 +1,200 @@
+The Following Documentation describes the specification of the plugTypes.xml configuration.
+
+It consists of three chapters:
+
+1. The xml-Structure in it self.
+2. The description of the Expression Language and its Variables
+3. The creation of Midi Commands and their attributes.
+
+1. The xml Structure.
+
+Examples:
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="ch.maybites.px1m0d.plug.collection.liveA.PlgDevice" name="Device.NumberOne">
+    	<parameter>
+			<jobs>
+				<job 	id="125" 
+						name="DeviceJobNumber02"
+						description="sends osc message to..." 
+						trigger="LocalEventBooleanPipe1 AND (LocalDataDoublePipe0 LT 1000)">
+					<message>
+						<target>
+							<sendToSocketID>23</sendToSocketID>
+						</target>
+						<midi>
+							<status type="noteON" channel="3" />
+							<data>LocalDataDoublePipe0 + 4</data>
+							<data>LocalDataDoublePipe0</data>
+						</midi>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+    </plug>
+</plugTree>
+
+More Abstract:
+
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="##ClassPath##" name="##PlugName##">
+    	<parameter>
+			<jobs>
+				<job 	id="##JobID##"
+						name="##JobName##"
+						description="##JobDescription##" 
+						trigger="##JobTrigger##">
+					<message>
+						<target>
+							##TargetTag##
+						</target>
+						<midi>
+							<status type="noteON" channel="3" />
+							<data>LocalDataDoublePipe0 + 4</data>
+							<data>LocalDataDoublePipe0</data>
+						</midi>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+    </plug>
+</plugTree>
+
+##ClassPath## <String> i.e. 'ch.maybites.px1m0d.plug.collection.liveA.PlgDevice'
+is the java class path to the java class that represents this plug.
+
+##PlugName## <String> i.e. 'Device.NumberOne'
+is the name of the plug as it appears inside the application tab "plugs". the dots represent the the different
+levels, similar to '/' for folder structures.
+
+##JobID## <int> i.e. '123'
+the jobs id. not used internally, only descriptive
+
+##JobName## <String> i.e. 'DeviceJobNumber02'
+the jobs name. not used internally, only descriptive
+
+##JobDescription## <String> i.e. 'sends osc message to...'
+the jobs description. not used internally, only descriptive
+
+##JobTrigger## <Boolean Expression> i.e. 'LocalEventBooleanPipe1 AND (LocalDataDoublePipe0 LT 1000)'
+Describes the condition, in which the job is beeing executed. Has to return a Boolean Value. (true or false)
+see more about Expressions in chapter 2.
+
+##TargetTag##
+there are currently the following target Tags available:
+<sendToWorld/>
+<sendToSocketID>##SocketID##</sendToSocketID>
+<sendToPlugID>##PlugID##</sendToPlugID>
+<sendToBoard>##SocketID##</sendToBoard>
+<sendToRow>##SocketID##</sendToRow>
+<sendToCollum>##SocketID##</sendToCollum>
+<sendToNeighbours>##SocketID##</sendToNeighbours>
+
+##SocketID## <int> i.e. '12'
+socket id, is numbered from 0 to 63, starting from upper left to lower right.
+
+##PlugID## <int> i.e. '2'
+plug id, is usually written on the plug itself and used internally to map the hardware plug with the software
+plug object. the mapping is not done inside this file but in a different file called defaultPlugMapping.xml or similar.
+
+
+##MessageTag##
+There are three different message types available, but Pipe is not yet implemented.
+<midi>
+	<status type="##MidiStatusType##" channel="3" />
+	<data>##MidiData##</data>
+	<data>##MidiData##</data>
+</midi>
+<osc address="192.168.1.27" path="/osc/level/two">
+	<addOscString>##OscDataString##</addOscString>
+	<addOscInt>##OscDataInt##</addOscInt>
+	<addOscFloat>##OscDataFloat##</addOscFloat>
+</osc>
+
+##MidiStatusType## <StatusType> i.e. 'NoteOn'
+see more under chapter 3.
+
+##MidiStatusChannel## <Expression> i.e. '2'
+a number between 0 and 15 [midi channel 1...16]. see more about this under chapter 3.
+
+##MidiData## <Expression> i.e. 'LocalDataPipe_0 + 4'
+The expression that calculates the value of the data-bytes. see more about this under chapter 2 and 3.
+
+##OscAdress## <String> i.e. '192.168.1.27'
+represents a valid IP adress, where the message should be sent to. is not implemented yet.
+
+##OscPath## <String> i.e. '/osc/level/two'
+represents a valid Osc Path
+
+##OscDataString## <String> i.e. 'plug1'
+adds a string to the osc message.
+
+##OscDataInt## <Expression> i.e. 'LocalDataPipe_0 / 2'
+adds a int to the osc message, calculated by the expression, see more in chapter 2
+
+##OscDataFloat## <Expression> i.e. 'LocalDataPipe_0 / 2.3'
+adds a float to the osc message, calculated by the expression, see more in chapter 2
+
+chapter 2. Expressions:
+
+Example Expressions:
+
+if-condition:
+if(LocalXPos == 1, true, false)
+
+chapter 3. Midi:
+
+The midi message is built according to the specs found on http://www.midi.org/techspecs/midimessages.php
+
+A midi message has usually three bytes. it starts with a statusbyte, followed by two (and sometimes more) data bytes.
+
+the statusbyte start with the first bit set to one, while the data bytes first bit is zero.
+
+the statusbyte is build up the following way:
+
+1tttcccc
+
+the first bit is set to one. the following three bits (t) define the status type (sometimes also called 'commands'). the following Types are
+allowed inside this config file:
+
+bits	Description					<StatusTyp> used for #MidiStatusType## (see chapter 1)
+
+000		Note Off Event				"NoteOff" 
+001		Note On Event				"NoteOn"
+010		Polyphonic Key Pressure		"PolyKeyPressure"
+011		Control Change				"ControlChange"
+100		Program Change				"ProgramChange"
+101		Channel Pressure			"ChannelPressure"
+110		Pitch Wheel Change			"PitchBend"
+111		System Exclusive Message	"SysEx"
+
+the following 4 bits (c) define the channel.
+
+bits	Description					Values calculated by the expression
+0000	channel 1					0
+0001	channel 2					1
+0010	channel 3					2
+0011	channel 4					3
+0100	channel 5					4
+0101	channel 6					5
+0110	channel 7					6
+0111	channel 8					7
+1000	channel 9					8
+1001	channel 10					9
+1010	channel 11					10
+1011	channel 12					11
+1100	channel 13					12
+1101	channel 14					13
+1110	channel 15					14
+1111	channel 16					15
+
+Each of the status types expect a certain number of databytes, most of the time 2, some none, one or in the case
+of sysex messages even as many as the user wants to. in order what is allowed, please check the above mentioned
+link. the value beeing sent with the databytes are allways calculated by an expression, but since a databyte can
+only have 7 bits (since the first bit has to be 0), it will always be cast into a value from 0 ... 127.
+
+
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="ch.maybites.px1m0d.plug.collection.liveA.PlgPiper" name="Piper.SimplePlumber">
+		<parameter>
+    		<display>
+    			<icon path="ch.maybites.px1m0d.plug.drawing.effects.icons.IconBasic">
+    				<color red="0" green="0" blue="255" alpha="255" />
+    				<label>SimplePlumber</label>
+    				<labelPipe0>*0*</labelPipe0>
+    				<labelPipe1>*1*</labelPipe1>
+    				<labelPipe2>*2*</labelPipe2>
+    				<labelPipe3>*3*</labelPipe3>
+    				<labelPipe4>*4*</labelPipe4>
+    				<labelPipe5>*5*</labelPipe5>
+    				<labelPipe6>*6*</labelPipe6>
+    				<labelPipe7>*7*</labelPipe7>
+    				<labelPipe8>*8*</labelPipe8>
+    			</icon>
+    		</display>
+ 			<jobs>
+				<job 	id="0" 
+						name="PiperJobNumber0"
+						description="sends pipe message if natebu message value changed - and pipe00 is not used" >
+					<message trigger="!LocalPipe00IsUsed and (LocalNatebuValueIsChanged or LocalPluggingIsToggled)">
+						<pipe channel="0">
+							<value type="abs">if(LocalDirection == 1, LocalNatebuValue, if(LocalDirection == 2, 127 + LocalNatebuValue / 2, if(LocalDirection == 3, 255 - LocalNatebuValue, 127 - LocalNatebuValue / 2) ) )</value>
+						</pipe>
+					</message>
+				</job>
+				<job 	id="0" 
+						name="PiperJobNumber1"
+						description="sends pipe message if pipe00 value has changed" >
+					<message trigger="LocalPipe00IsUsed and (LocalPipeValue00IsChanged or LocalPluggingIsToggled)">
+						<pipe channel="0">
+							<value type="abs">LocalPipeValue00</value>
+						</pipe>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+	</plug>
+</plugTree>

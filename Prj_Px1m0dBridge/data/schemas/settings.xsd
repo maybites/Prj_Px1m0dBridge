@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    elementFormDefault="qualified"
+	xmlns="http://maybites.ch/px1m0d/settingsSchema" 
+	targetNamespace="http://maybites.ch/px1m0d/settingsSchema">
+	
+    <xsd:element name="setup" type="setup"></xsd:element>
+
+
+    <xsd:complexType name="setup">
+    	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    		<xsd:element name="property" type="property"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="property">
+    	<xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+    	<xsd:attribute name="value" type="xsd:string" use="required"></xsd:attribute>
+    </xsd:complexType>
+</xsd:schema>

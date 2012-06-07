@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="ch.maybites.px1m0d.plug.collection.liveA.PlgChainEnd" name="Device.NatebuProxy">
+    	<parameter>
+    		<display>
+    			<icon path="ch.maybites.px1m0d.plug.drawing.effects.icons.IconBasic">
+    				<color red="50" green="50" blue="50" alpha="255" />
+    				<label>NatebuProxy</label>
+    				<labelPipe0>*0*</labelPipe0>
+    				<labelPipe1>*1*</labelPipe1>
+    				<labelPipe2>*2*</labelPipe2>
+    				<labelPipe3>*3*</labelPipe3>
+    				<labelPipe4>*4*</labelPipe4>
+    				<labelPipe5>*5*</labelPipe5>
+    				<labelPipe6>*6*</labelPipe6>
+    				<labelPipe7>*7*</labelPipe7>
+    				<labelPipe8>*8*</labelPipe8>
+    			</icon>
+    		</display>
+			<jobs>
+				<job>
+					<message trigger="LocalButtonIsToggled ">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/test'</addressPattern>
+							<addOscString>'Button is toggled'</addOscString>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuCenterButtonHasChanged ">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/centralButton'</addressPattern>
+							<addOscInt>if(NatebuCentralButtonIsPressed == true, 1, 0)</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuLeftSelectorHasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/leftSelector'</addressPattern>
+							<addOscInt>NatebuSelectorLeft</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuRightSelectorHasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/rightSelector'</addressPattern>
+							<addOscInt>NatebuSelectorRight</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuLeftPotiHasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/leftPoti'</addressPattern>
+							<addOscInt>NatebuPotiLeft</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuRightPotiHasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/rightPoti'</addressPattern>
+							<addOscInt>NatebuPotiRight</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuAInputHasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/AInput'</addressPattern>
+							<addOscInt>if(NatebuPlugAInput1IsOn, 1, 0)</addOscInt>
+							<addOscInt>if(NatebuPlugAInput2IsOn, 1, 0)</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuBInputHasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/BInput'</addressPattern>
+							<addOscInt>if(NatebuPlugBInput1IsOn, 1, 0)</addOscInt>
+							<addOscInt>if(NatebuPlugBInput2IsOn, 1, 0)</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuBottomSwitchHasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/bottomSwitches'</addressPattern>
+							<addOscInt>NatebuBottomSwitch00</addOscInt>
+							<addOscInt>NatebuBottomSwitch01</addOscInt>
+							<addOscInt>NatebuBottomSwitch02</addOscInt>
+							<addOscInt>NatebuBottomSwitch03</addOscInt>
+							<addOscInt>NatebuBottomSwitch04</addOscInt>
+							<addOscInt>NatebuBottomSwitch05</addOscInt>
+							<addOscInt>NatebuBottomSwitch06</addOscInt>
+							<addOscInt>NatebuBottomSwitch07</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="NatebuRightSwitchHasChanged">
+						<osc ipAddress="world">
+							<addressPattern>'/natebu/rightSwitches'</addressPattern>
+							<addOscInt>NatebuRightSwitch00</addOscInt>
+							<addOscInt>NatebuRightSwitch01</addOscInt>
+							<addOscInt>NatebuRightSwitch02</addOscInt>
+							<addOscInt>NatebuRightSwitch03</addOscInt>
+							<addOscInt>NatebuRightSwitch04</addOscInt>
+							<addOscInt>NatebuRightSwitch05</addOscInt>
+							<addOscInt>NatebuRightSwitch06</addOscInt>
+							<addOscInt>NatebuRightSwitch07</addOscInt>
+						</osc>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+    </plug>
+ </plugTree>

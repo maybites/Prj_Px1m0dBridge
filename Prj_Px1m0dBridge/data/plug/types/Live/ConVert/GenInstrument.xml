@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugTree xmlns="http://maybites.ch/px1m0d/plugTypesSchema"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maybites.ch/px1m0d/plugTypesSchema file:./data/schemas/plugTypes.xsd">
+    <plug path="ch.maybites.px1m0d.plug.collection.liveA.PlgChainEnd" name="GenInstrument">
+    	<parameter>
+    		<display>
+    			<icon path="ch.maybites.px1m0d.plug.drawing.effects.icons.IconBasic">
+    				<color red="0" green="255" blue="0" alpha="255" />
+    				<label>GenInstrument</label>
+    				<labelPipe0>*</labelPipe0>
+    				<labelPipe1>Macro3</labelPipe1>
+    				<labelPipe2>Macro4</labelPipe2>
+    				<labelPipe3>Macro8</labelPipe3>
+    				<labelPipe4>Macro7</labelPipe4>
+    				<labelPipe5>Macro6</labelPipe5>
+    				<labelPipe6>Macro5</labelPipe6>
+    				<labelPipe7>Macro1</labelPipe7>
+    				<labelPipe8>Macro2</labelPipe8>
+    			</icon>
+    		</display>
+			<jobs>
+				<job>
+					<message trigger="LocalPipeValue07HasChanged and LocalSwitchIsOn and LocalPlugIsLinked">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LinkPlugName+')/devices.getDeviceNumberFromClass(InstrumentGroupDevice)/parameters.getParameterNumberFromOriginalName(Macro 1)'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscInt>LocalPipeValue07 /2</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue08HasChanged and LocalSwitchIsOn and LocalPlugIsLinked">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LinkPlugName+')/devices.getDeviceNumberFromClass(InstrumentGroupDevice)/parameters.getParameterNumberFromOriginalName(Macro 2)'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscInt>LocalPipeValue08 /2</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue01HasChanged and LocalSwitchIsOn and LocalPlugIsLinked">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LinkPlugName+')/devices.getDeviceNumberFromClass(InstrumentGroupDevice)/parameters.getParameterNumberFromOriginalName(Macro 3)'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscInt>LocalPipeValue01 /2</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue02HasChanged and LocalSwitchIsOn and LocalPlugIsLinked">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LinkPlugName+')/devices.getDeviceNumberFromClass(InstrumentGroupDevice)/parameters.getParameterNumberFromOriginalName(Macro 4)'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscInt>LocalPipeValue02 /2</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue06HasChanged and LocalSwitchIsOn and LocalPlugIsLinked">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LinkPlugName+')/devices.getDeviceNumberFromClass(InstrumentGroupDevice)/parameters.getParameterNumberFromOriginalName(Macro 5)'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscInt>LocalPipeValue06 /2</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue05HasChanged and LocalSwitchIsOn and LocalPlugIsLinked">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LinkPlugName+')/devices.getDeviceNumberFromClass(InstrumentGroupDevice)/parameters.getParameterNumberFromOriginalName(Macro 6)'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscInt>LocalPipeValue05 /2</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue04HasChanged and LocalSwitchIsOn and LocalPlugIsLinked">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LinkPlugName+')/devices.getDeviceNumberFromClass(InstrumentGroupDevice)/parameters.getParameterNumberFromOriginalName(Macro 7)'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscInt>LocalPipeValue04 /2</addOscInt>
+						</osc>
+					</message>
+				</job>
+				<job>
+					<message trigger="LocalPipeValue03HasChanged and LocalSwitchIsOn and LocalPlugIsLinked">
+						<osc ipAddress="world">
+							<addressPattern>'/liveAPI/live_set/tracks.getTrackNumberFromName('+LinkPlugName+')/devices.getDeviceNumberFromClass(InstrumentGroupDevice)/parameters.getParameterNumberFromOriginalName(Macro 8)'</addressPattern>
+							<addOscString>'set'</addOscString>
+							<addOscString>'value'</addOscString>
+							<addOscInt>LocalPipeValue03 /2</addOscInt>
+						</osc>
+					</message>
+				</job>
+			</jobs>
+		</parameter>
+    </plug>
+ </plugTree>

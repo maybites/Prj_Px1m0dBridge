@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maybites.ch/px1m0d/preferencesSchema file:./data/schemas/preferences.xsd" xmlns="http://maybites.ch/px1m0d/preferencesSchema">
+  <property name="sceneLatency" value="2.0"/>
+  <property name="oscServerUrl" value="127.0.0.1"/>
+  <property name="oscServerPort" value="13001"/>
+  <property name="oscListenerPort" value="12000"/>
+  <property name="DefaultOutputPxlmodMidiConnection" value="Port B +ltMOut:4+gt"/>
+  <property name="DefaultInputPxlmodMidiConnection" value="Port B +ltMIn:4+gt"/>
+  <property name="DefaultInputWorldMidiConnection" value="world +ltMIn:1+gt"/>
+  <property name="DefaultOutputWorldMidiConnection" value="world +ltMOut:1+gt"/>
+  <property name="DefaultNatebuSerialConnection" value="/dev/tty.usbserial-A9007M8f"/>
+</preferences>

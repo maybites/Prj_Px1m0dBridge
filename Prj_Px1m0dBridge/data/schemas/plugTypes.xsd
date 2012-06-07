@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns="http://maybites.ch/px1m0d/plugTypesSchema" 
+            targetNamespace="http://maybites.ch/px1m0d/plugTypesSchema">
+
+    <xsd:element name="plugTree" type="plugTree"></xsd:element>
+
+
+    <xsd:complexType name="plugTree">
+        <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+    		<xsd:element name="plug" type="plug"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="plug">
+        <xsd:all minOccurs="1" maxOccurs="1">
+    		<xsd:element name="parameter" type="parameter"></xsd:element>
+    	</xsd:all>
+    	<xsd:attribute name="path" type="xsd:string"></xsd:attribute>
+    	<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="parameter">
+        <xsd:all maxOccurs="1" minOccurs="0">
+    		<xsd:element name="jobs" type="jobs"></xsd:element>
+    	</xsd:all>
+    </xsd:complexType>
+
+    <xsd:complexType name="jobs">
+        <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+    		<xsd:element name="job" type="job"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="job">
+        <xsd:all>
+        	<xsd:element name="message" type="message"></xsd:element>
+        </xsd:all>
+
+
+        <xsd:attribute name="id" type="xsd:int" use="optional"></xsd:attribute>
+    	<xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+    	<xsd:attribute name="description" type="xsd:string"
+    		use="optional">
+    	</xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="midi">
+    	<xsd:sequence>
+    		<xsd:element name="status" type="status" minOccurs="1"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="data" type="xsd:string" minOccurs="1"
+    			maxOccurs="unbounded">
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="status">
+    	<xsd:attribute name="channel" type="xsd:string"
+    		use="optional">
+    	</xsd:attribute>
+    	<xsd:attribute name="type" type="xsd:string" use="required"></xsd:attribute>
+    </xsd:complexType>
+
+
+
+
+    <xsd:complexType name="osc">
+        <xsd:sequence>
+    		<xsd:element name="addOscString" type="xsd:string" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    		<xsd:element name="addOscInt" type="xsd:string" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    		<xsd:element name="addOscFloat" type="xsd:string" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="address" type="xsd:string" use="required"></xsd:attribute>
+    	<xsd:attribute name="path" type="xsd:string" use="required"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="pipe">
+        <xsd:all minOccurs="1" maxOccurs="1">
+    		<xsd:element name="value" type="value" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:all>
+    	<xsd:attribute name="channel" type="xsd:string" use="required">
+    	</xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="message" mixed="true"><xsd:complexContent><xsd:extension base="xsd:anyType">
+                <xsd:all>
+                    <xsd:element name="target" type="target" maxOccurs="1">
+    		</xsd:element>
+                    <xsd:element name="osc" type="osc">
+    		</xsd:element>
+                    <xsd:element name="pipe" type="pipe"></xsd:element>
+                    <xsd:element name="midi" type="midi">
+    		</xsd:element>
+    	</xsd:all>
+                    	
+                <xsd:attribute name="trigger" type="xsd:string"></xsd:attribute>
+                    
+            </xsd:extension></xsd:complexContent></xsd:complexType>
+
+    <xsd:complexType name="target">
+    	<xsd:choice minOccurs="1" maxOccurs="1">
+    		<xsd:element name="sendToWorld" type="xsd:string"></xsd:element>
+    		<xsd:element name="sendToSocketID" type="xsd:string"></xsd:element>
+    		<xsd:element name="sendToPlugID" type="xsd:string"></xsd:element>
+    		<xsd:element name="sendToRow" type="xsd:string"></xsd:element>
+    		<xsd:element name="sendToCollum" type="xsd:string"></xsd:element>
+    		<xsd:element name="sendToNeighbour" type="xsd:string"></xsd:element>
+    	</xsd:choice>
+    </xsd:complexType>
+
+
+
+    <xsd:complexType name="value">
+    	<xsd:attribute name="type" type="xsd:string" use="required"></xsd:attribute>
+    </xsd:complexType>
+
+</xsd:schema>
