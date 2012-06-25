@@ -111,7 +111,7 @@ public class ConfigGUI implements ControlListener{
 		controlWindow.setBackground(applet.color(40));
 
 
-		connectionTab = controlWindow.getCurrentTab();
+		connectionTab = controlWindow.currentTab();
 		connectionTab.setLabel(TAB_CONNECTION);
 		setupConnectionTab();
 
@@ -136,7 +136,7 @@ public class ConfigGUI implements ControlListener{
 	}
 
 	private void setupLogTab(){
-		RadioButton r = controlP5.addRadio(RADIO_NAME_LISTEN, 360, 5);
+		Radio r = controlP5.addRadio(RADIO_NAME_LISTEN,360, 5);
 		r.addItem("off", 0);
 		r.addItem("on", 1);
 		r.moveTo(controlWindow);
@@ -207,10 +207,10 @@ public class ConfigGUI implements ControlListener{
 		MultiListButton d;
 		d = mySerial.add("Natebu",4);
 		d.setColorBackground(applet.color(0, 64 + 20,0,255));
-		d.setValueLabel("Serial <-> "+connector.getSerialConnection());
+		d.setLabel("Serial <-> "+connector.getSerialConnection());
 		for(int i=0; i < connector.getNOfSerialConn(); i++){
 			MultiListButton c = d.add("Natebu serial" + (61 + i),61 + i);
-			c.setValueLabel(connector.getSerialConnLabel(i));
+			c.setLabel(connector.getSerialConnLabel(i));
 			c.setColorBackground(applet.color(0, 64 + 20*i,(64 + 20*i)/2,255));
 		}
 		mySerial.moveTo(connectionTab);
@@ -219,34 +219,34 @@ public class ConfigGUI implements ControlListener{
 		MultiListButton b;
 		b = myList.add("Device1",1);
 		b.setColorBackground(applet.color(64 + 20,0,0,255));
-		b.setValueLabel("Px1m0d <- "+connector.getPxlm0dOutputConnection());
+		b.setLabel("Px1m0d <- "+connector.getPxlm0dOutputConnection());
 		for(int i=0; i < connector.getNOfOutputs(); i++){
 			MultiListButton c = b.add("Device1 item" + (11 + i),11 + i);
-			c.setValueLabel(connector.getOutputLabel(i));
+			c.setLabel(connector.getOutputLabel(i));
 			c.setColorBackground(applet.color(64 + 20*i,(64 + 20*i)/2,0,255));
 		}
 		b = myList.add("Device2",2);
 		b.setColorBackground(applet.color(64 + 40,0,0,255));
-		b.setValueLabel("Px1m0d -> "+connector.getPxlm0dInputConnection());
+		b.setLabel("Px1m0d -> "+connector.getPxlm0dInputConnection());
 		for(int i=0; i < connector.getNOfInputs(); i++){
 			MultiListButton c = b.add("Device2 item" + (21 + i),21 + i);
-			c.setValueLabel(connector.getInputLabel(i));
+			c.setLabel(connector.getInputLabel(i));
 			c.setColorBackground(applet.color(64 + 20*i,(64 + 20*i)/2,0,255));
 		}
 		b = myList.add("Device3",3);
 		b.setColorBackground(applet.color(64 + 60,0,0,255));
-		b.setValueLabel("World <- "+connector.getWorldOutputConnection());
+		b.setLabel("World <- "+connector.getWorldOutputConnection());
 		for(int i=0; i < connector.getNOfOutputs(); i++){
 			MultiListButton c = b.add("Device3 item" + (31 + i),31 + i);
-			c.setValueLabel(connector.getOutputLabel(i));
+			c.setLabel(connector.getOutputLabel(i));
 			c.setColorBackground(applet.color(64 + 20*i,(64 + 20*i)/2,0,255));
 		}
 		b = myList.add("Device4",4);
 		b.setColorBackground(applet.color(64 + 80,0,0,255));
-		b.setValueLabel("World -> "+connector.getWorldInputConnection());
+		b.setLabel("World -> "+connector.getWorldInputConnection());
 		for(int i=0; i < connector.getNOfInputs(); i++){
 			MultiListButton c = b.add("Device4 item" + (41 + i),41 + i);
-			c.setValueLabel(connector.getInputLabel(i));
+			c.setLabel(connector.getInputLabel(i));
 			c.setColorBackground(applet.color(64 + 20*i,(64 + 20*i)/2,0,255));
 		}		
 		myList.moveTo(connectionTab);
@@ -267,7 +267,7 @@ public class ConfigGUI implements ControlListener{
 
 	private void updatePlugTabButtons(){
 		for(int i = 1; i < plugIdMapping.length; i++){
-			plugIdMapping[i].setValueLabel(BUTTON_NAME_PLUDID_PREPEND + i + BUTTON_NAME_PLUDID_BETWEEN + this.plugFactory.getPlugName(i));
+			plugIdMapping[i].setLabel(BUTTON_NAME_PLUDID_PREPEND + i + BUTTON_NAME_PLUDID_BETWEEN + this.plugFactory.getPlugName(i));
 		}
 	}
 
@@ -335,18 +335,18 @@ public class ConfigGUI implements ControlListener{
 		MultiListButton level3 = null;
 		levelX = myList.add(MULTILIST_PLUGTYPE_ROOT,CID_PLUGTYPE_MULTILIST_ROOT);
 		levelX.setColorBackground(applet.color(64 + 20,0,0,0));
-		levelX.setValueLabel("Select:");
+		levelX.setLabel("Select:");
 		String[] plugs = plugFactory.getPlugList();
 		for(int i=0; i < plugs.length; i++){
 			// if the new label is different than the last one:
 			if(!isEqualLastLabel(plugs, i, 0) && getLabel(plugs, i, 0) != null){
 				if(isLastLevel(plugs, i, 0)){
 					level0 = levelX.add(plugs[i], CID_PLUGTYPE_MULTILIST + i);
-					level0.setValueLabel(getLabel(plugs, i, 0));
+					level0.setLabel(getLabel(plugs, i, 0));
 					level0.setColorBackground(applet.color(120 + 10 * getLevelIndex(plugs, i, 0),(120)/2, 200, 255));
 				} else {
 					level0 = levelX.add(getLabel(plugs, i, 0), CID_PLUGTYPE_MULTILIST_ROOT + i);
-					level0.setValueLabel(getLabel(plugs, i, 0));
+					level0.setLabel(getLabel(plugs, i, 0));
 					level0.setColorBackground(applet.color(120 + 10 * getLevelIndex(plugs, i, 0),(120)/2, 0, 255));
 				}
 			}
@@ -354,11 +354,11 @@ public class ConfigGUI implements ControlListener{
 			if(level0 != null && !isEqualLastLabel(plugs, i, 1) && getLabel(plugs, i, 1) != null){
 				if(isLastLevel(plugs, i, 1)){
 					level1 = level0.add(plugs[i], CID_PLUGTYPE_MULTILIST + i);
-					level1.setValueLabel(getLabel(plugs, i, 1));
+					level1.setLabel(getLabel(plugs, i, 1));
 					level1.setColorBackground(applet.color(120,(120 + 10 * getLevelIndex(plugs, i, 1))/2, 200, 255));
 				} else {
 					level1 = level0.add(getLabel(plugs, i, 1), CID_PLUGTYPE_MULTILIST_ROOT + i);
-					level1.setValueLabel(getLabel(plugs, i, 1));
+					level1.setLabel(getLabel(plugs, i, 1));
 					level1.setColorBackground(applet.color(120,(120 + 10 * getLevelIndex(plugs, i, 1))/2, 0, 255));
 				}
 			}
@@ -366,11 +366,11 @@ public class ConfigGUI implements ControlListener{
 			if(level1 != null && !isEqualLastLabel(plugs, i, 2) && getLabel(plugs, i, 2) != null){
 				if(isLastLevel(plugs, i, 2)){
 					level2 = level1.add(plugs[i], CID_PLUGTYPE_MULTILIST + i);
-					level2.setValueLabel(getLabel(plugs, i, 2));
+					level2.setLabel(getLabel(plugs, i, 2));
 					level2.setColorBackground(applet.color(120 + 10 * getLevelIndex(plugs, i, 2),(120 + 10 * getLevelIndex(plugs, i, 2))/2, 200,255));
 				} else {
 					level2 = level1.add(getLabel(plugs, i, 2), CID_PLUGTYPE_MULTILIST_ROOT + i);
-					level2.setValueLabel(getLabel(plugs, i, 2));
+					level2.setLabel(getLabel(plugs, i, 2));
 					level2.setColorBackground(applet.color(120 + 10 * getLevelIndex(plugs, i, 2),(120 + 10 * getLevelIndex(plugs, i, 2))/2, 0,255));
 				}
 			}
@@ -378,11 +378,11 @@ public class ConfigGUI implements ControlListener{
 			if(level2 != null && !isEqualLastLabel(plugs, i, 3) && getLabel(plugs, i, 3) != null){
 				if(isLastLevel(plugs, i, 3)){
 					level3 = level2.add(plugs[i], CID_PLUGTYPE_MULTILIST + i);
-					level3.setValueLabel(getLabel(plugs, i, 3));
+					level3.setLabel(getLabel(plugs, i, 3));
 					level3.setColorBackground(applet.color(120 + 10 * getLevelIndex(plugs, i, 3),(120 + 10 * getLevelIndex(plugs, i, 3))/2, 200, 255));
 				} else {
 					level3 = level2.add(getLabel(plugs, i, 3), CID_PLUGTYPE_MULTILIST_ROOT + 1);
-					level3.setValueLabel(getLabel(plugs, i, 3));
+					level3.setLabel(getLabel(plugs, i, 3));
 					level3.setColorBackground(applet.color(120 + 10 * getLevelIndex(plugs, i, 3),(120 + 10 * getLevelIndex(plugs, i, 3))/2, 0, 255));
 				}
 			}
@@ -398,19 +398,19 @@ public class ConfigGUI implements ControlListener{
 
 	public void controlEvent(ControlEvent theEvent) {
 		try{
-			Debugger.getInstance().verboseMessage(this.getClass(),"event name: " + theEvent.getController().getValue());
-			Debugger.getInstance().verboseMessage(this.getClass(),"event value: " + theEvent.getController().getValue());
+			Debugger.getInstance().verboseMessage(this.getClass(),"event name: " + theEvent.controller().name());
+			Debugger.getInstance().verboseMessage(this.getClass(),"event value: " + theEvent.controller().value());
 
 			/*
 			 * Scene Tab Event
 			 */
-			if(theEvent.getController().getValue() == CID_SOCKETMANAGER_LOAD_BUTTON){
+			if(theEvent.controller().value() == CID_SOCKETMANAGER_LOAD_BUTTON){
 				String path = this.applet.selectInput("*.pxs");
 				Debugger.getInstance().verboseMessage(this.getClass(), "loading scene from: " + path);
 				this.dispatcher.loadScene(path);
 			}
 
-			if(theEvent.getController().getValue() == CID_SOCKETMANAGER_SAVE_BUTTON){
+			if(theEvent.controller().value() == CID_SOCKETMANAGER_SAVE_BUTTON){
 				String path = this.applet.selectOutput("*.pxs");
 				Debugger.getInstance().verboseMessage(this.getClass(), "saving scene to: " + path);
 				this.dispatcher.saveScene(path);
@@ -420,23 +420,23 @@ public class ConfigGUI implements ControlListener{
 			/*
 			 * Plug Tab Event
 			 */
-			if(theEvent.getController().getValue() == CID_PLUGEDIT_BUTTON){
-				Debugger.getInstance().verboseMessage(this.getClass(), "edit xml file " + controlP5.getController(MULTILIST_PLUGTYPE_ROOT).getLabel());
-				String path = this.plugFactory.getPlugConfigFilePath(controlP5.getController(MULTILIST_PLUGTYPE_ROOT).getLabel());
+			if(theEvent.controller().value() == CID_PLUGEDIT_BUTTON){
+				Debugger.getInstance().verboseMessage(this.getClass(), "edit xml file " + controlP5.controller(MULTILIST_PLUGTYPE_ROOT).label());
+				String path = this.plugFactory.getPlugConfigFilePath(controlP5.controller(MULTILIST_PLUGTYPE_ROOT).label());
 				if(path.length() > 0){
 					openXMLFileEditor(path);			
 				}
 				//updatePlugTabButtons();
 			}
 
-			if(theEvent.getController().getValue() == CID_PLUGLOAD_BUTTON){
+			if(theEvent.controller().value() == CID_PLUGLOAD_BUTTON){
 				String path = this.applet.selectInput("*.xml");
 				Debugger.getInstance().verboseMessage(this.getClass(), "loading plugingmapping to: " + path);
 				this.plugFactory.loadMappings(path);
 				updatePlugTabButtons();
 			}
 
-			if(theEvent.getController().getValue() == CID_PLUGSAVE_BUTTON){
+			if(theEvent.controller().value() == CID_PLUGSAVE_BUTTON){
 				String path = this.applet.selectOutput("*.xml");
 				Debugger.getInstance().verboseMessage(this.getClass(), "saving plugingmapping to: " + path);
 				this.plugFactory.saveMappings(path);
@@ -444,64 +444,64 @@ public class ConfigGUI implements ControlListener{
 
 
 			//find PlugType Button events
-			if(theEvent.getController().getValue() >= CID_PLUGTYPE_BUTTON && theEvent.getController().getValue() < (CID_PLUGTYPE_BUTTON+100)){
-				int plugID = (int)theEvent.getController().getValue() - CID_PLUGTYPE_BUTTON;
+			if(theEvent.controller().value() >= CID_PLUGTYPE_BUTTON && theEvent.controller().value() < (CID_PLUGTYPE_BUTTON+100)){
+				int plugID = (int)theEvent.controller().value() - CID_PLUGTYPE_BUTTON;
 				Debugger.getInstance().verboseMessage(this.getClass(), "event plugID: " + plugID);
 				this.plugFactory.setPlugMapping(plugID, selectedPlugType);
-				theEvent.getController().setCaptionLabel(BUTTON_NAME_PLUDID_PREPEND + plugID + BUTTON_NAME_PLUDID_BETWEEN + selectedPlugType);
+				theEvent.controller().setLabel(BUTTON_NAME_PLUDID_PREPEND + plugID + BUTTON_NAME_PLUDID_BETWEEN + selectedPlugType);
 			}
 
 			//find PlugType Multilist events
-			if(theEvent.getController().getValue() >= CID_PLUGTYPE_MULTILIST && theEvent.getController().getValue() < (CID_PLUGTYPE_MULTILIST+100)){
-				controlP5.getController(MULTILIST_PLUGTYPE_ROOT).setCaptionLabel(theEvent.getController().getName());
-				selectedPlugType = theEvent.getController().getName();
+			if(theEvent.controller().value() >= CID_PLUGTYPE_MULTILIST && theEvent.controller().value() < (CID_PLUGTYPE_MULTILIST+100)){
+				controlP5.controller(MULTILIST_PLUGTYPE_ROOT).setLabel(theEvent.controller().name());
+				selectedPlugType = theEvent.controller().name();
 			}
 
 			//Serial connection chosen
-			if(theEvent.getController().getName().indexOf("serial") != -1){
-				Debugger.getInstance().verboseMessage(this.getClass(), "parent label: " + controlP5.getController("level" + (int)(theEvent.getValue()/10)).getLabel());
-				String label = controlP5.getController("Natebu").getLabel();
-				String name = controlP5.getController("Natebu").getName();
+			if(theEvent.controller().name().indexOf("serial") != -1){
+				Debugger.getInstance().verboseMessage(this.getClass(), "parent label: " + controlP5.controller("level" + (int)(theEvent.value()/10)).label());
+				String label = controlP5.controller("Natebu").label();
+				String name = controlP5.controller("Natebu").name();
 				if(label.indexOf(" <-> ") != -1){
-					label = label.substring(0, label.indexOf(" <-> "))+ " <-> " + theEvent.getController().getLabel();
+					label = label.substring(0, label.indexOf(" <-> "))+ " <-> " + theEvent.controller().label();
 				}
-				controlP5.getController("Natebu").setCaptionLabel(label);
+				controlP5.controller("Natebu").setLabel(label);
 				if(name.equals("Natebu")){
-					connector.setSerialConnection(theEvent.getLabel());
-					Debugger.getInstance().verboseMessage(this.getClass(), "change SerialConnection to: " + theEvent.getController().getLabel());
+					connector.setSerialConnection(theEvent.label());
+					Debugger.getInstance().verboseMessage(this.getClass(), "change SerialConnection to: " + theEvent.controller().label());
 				}
 			}
 
 			/*
 			 * updates the list-lables 
 			 */
-			if(theEvent.getController().getName().indexOf("item") != -1){
-				String label = controlP5.getController("Device" + (int)(theEvent.getValue()/10)).getName();
-				String name = controlP5.getController("Device" + (int)(theEvent.getValue()/10)).getName();
+			if(theEvent.controller().name().indexOf("item") != -1){
+				String label = controlP5.controller("Device" + (int)(theEvent.value()/10)).label();
+				String name = controlP5.controller("Device" + (int)(theEvent.value()/10)).name();
 				if(label.indexOf(" -> ") != -1){
-					label = label.substring(0, label.indexOf(" -> "))+ " -> " + theEvent.getController().getName();
+					label = label.substring(0, label.indexOf(" -> "))+ " -> " + theEvent.controller().label();
 				}
 				if(label.indexOf(" <- ") != -1){
-					label = label.substring(0, label.indexOf(" <- "))+ " <- " + theEvent.getController().getName();
+					label = label.substring(0, label.indexOf(" <- "))+ " <- " + theEvent.controller().label();
 				}
-				controlP5.getController("Device" + (int)(theEvent.getValue()/10)).setCaptionLabel(label);
+				controlP5.controller("Device" + (int)(theEvent.value()/10)).setLabel(label);
 				if(name.equals("Device1")){
-					connector.setPxlm0dOutputConnection(theEvent.getName());
+					connector.setPxlm0dOutputConnection(theEvent.label());
 				}
 				else if(name.equals("Device2")){
-					connector.setPxlm0dInputConnection(theEvent.getName());
+					connector.setPxlm0dInputConnection(theEvent.label());
 				}
 				else if(name.equals("Device3")){
-					connector.setWorldOutputConnection(theEvent.getName());
+					connector.setWorldOutputConnection(theEvent.label());
 				}
 				else if(name.equals("Device4")){
-					connector.setWorldInputConnection(theEvent.getName());
+					connector.setWorldInputConnection(theEvent.label());
 				}
 			}
 			/*
 			 * clears messages windows
 			 */
-			if(theEvent.getController().getName().equals(BUTTON_NAME_CLEAR)){
+			if(theEvent.controller().name().equals(BUTTON_NAME_CLEAR)){
 				px1m0dOutputMessage = "";
 				worldOutputMessage = "";
 				px1m0dInputMessage = "";
@@ -514,7 +514,7 @@ public class ConfigGUI implements ControlListener{
 			/*
 			 * connects osc
 			 */
-			if(theEvent.getController().getName().equals(BUTTON_NAME_CONNECTOSC)){
+			if(theEvent.controller().name().equals(BUTTON_NAME_CONNECTOSC)){
 				connector.enableOSCWorld(oscServerUrl.getText(), 
 						new Integer(oscServerPort.getText()).intValue(), 
 						new Integer(oscListenerPort.getText()).intValue());
@@ -522,21 +522,21 @@ public class ConfigGUI implements ControlListener{
 			/*
 			 * restart button pressed
 			 */
-			if(theEvent.getController().getName().equals(BUTTON_NAME_RESTART)){
+			if(theEvent.controller().name().equals(BUTTON_NAME_RESTART)){
 				dispatcher.restartSimulation();
 			}
 			/*
 			 * refresh config button pressed
 			 */
-			if(theEvent.getController().getName().equals(BUTTON_NAME_REFRESH_CONFIG)){
+			if(theEvent.controller().name().equals(BUTTON_NAME_REFRESH_CONFIG)){
 				dispatcher.refresh();
 				setupPlugTab2();
 			}
 			/*
 			 * radio buttons to listen to messages
 			 */
-			if(theEvent.getController().getName().equals(RADIO_NAME_LISTEN)){
-				switch((int)theEvent.getController().getValue()) {
+			if(theEvent.controller().name().equals(RADIO_NAME_LISTEN)){
+				switch((int)theEvent.controller().value()) {
 				case(0):
 					this.connector.stopListenToMessages();
 				controlWindow.setUpdateMode(ControlWindow.ECONOMIC);
@@ -550,15 +550,15 @@ public class ConfigGUI implements ControlListener{
 			/*
 			 * if the SceneLatency Slider has been changed, the global values have to be changed as well
 			 */
-			if(theEvent.getController().getName().equals(SLIDER_NAME_SCENELATENCY)){
-				GlobalPreferences.getInstance().setLatency(sceneLatency.getValue());
+			if(theEvent.controller().name().equals(SLIDER_NAME_SCENELATENCY)){
+				GlobalPreferences.getInstance().setLatency(sceneLatency.value());
 			}
 
 
 			/*
 			 * Saves the preferences
 			 */
-			if(theEvent.getController().getName().equals(BUTTON_NAME_SAVEPREF_CONNECTIONS)){
+			if(theEvent.controller().name().equals(BUTTON_NAME_SAVEPREF_CONNECTIONS)){
 				parameters.setPreferenceValue(parameters.PARAM_DefaultInputPxlmodMidiConnection, connector.getPxlm0dInputConnection());
 				parameters.setPreferenceValue(parameters.PARAM_DefaultInputWorldMidiConnection, connector.getWorldInputConnection());
 				parameters.setPreferenceValue(parameters.PARAM_DefaultOutputPxlmodMidiConnection, connector.getPxlm0dOutputConnection());
@@ -567,7 +567,7 @@ public class ConfigGUI implements ControlListener{
 				parameters.setPreferenceValue(parameters.PARAM_oscListenerPort, oscListenerPort.getText());
 				parameters.setPreferenceValue(parameters.PARAM_oscServerPort, oscServerPort.getText());
 				parameters.setPreferenceValue(parameters.PARAM_oscServerUrl, oscServerUrl.getText());
-				parameters.setPreferenceValue(parameters.PARAM_sceneLatency, ""+ sceneLatency.getValue());
+				parameters.setPreferenceValue(parameters.PARAM_sceneLatency, ""+ sceneLatency.value());
 				parameters.savePreferences();
 			}
 		}catch(Exception e){

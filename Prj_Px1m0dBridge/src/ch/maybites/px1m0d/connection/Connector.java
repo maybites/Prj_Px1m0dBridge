@@ -111,6 +111,7 @@ public class Connector {
 	// needs to be set after initialization because of the serial connection
 	public void setDefaultConnections(){
 		try{
+			boolean flag_pout, flag_wout, flag_pin, flag_win;
 			for(int i = 0; i < outputInfo.length; i++){
 				if(outputInfo[i].getName().contains(myParameters.getPreferenceValue(myParameters.PARAM_DefaultOutputPxlmodMidiConnection))){
 					pxlm0dOutConnect = new Connection(outputInfo[i].getName(), midiDevManager.requestReceiver(outputInfo[i]));
@@ -135,6 +136,26 @@ public class Connector {
 					setSerialConnection(getSerialConnLabel(i));
 				}
 			}
+
+			//if no connections were set:
+			if(pxlm0dOutConnect == null && outputInfo.length > 0){
+				pxlm0dOutConnect = new Connection(outputInfo[0].getName(), midiDevManager.requestReceiver(outputInfo[0]));
+			}
+			if(worldOutConnect == null && outputInfo.length > 0){
+				worldOutConnect = new Connection(outputInfo[0].getName(), midiDevManager.requestReceiver(outputInfo[0]));
+			}
+			if(pxlm0dInConnect == null && inputInfo.length > 0){
+				midiDevManager.setTransmitter(inputInfo[0], new Px1m0dReceiver(this));
+				pxlm0dInConnect = new Connection(inputInfo[0].getName());
+			}
+			if(worldInConnect == null && inputInfo.length > 0){
+				midiDevManager.setTransmitter(inputInfo[0], new Px1m0dReceiver(this));
+				worldInConnect = new Connection(inputInfo[0].getName());
+			}
+			if(mySerial == null && getNOfSerialConn() > 0){
+				setSerialConnection(getSerialConnLabel(0));
+			}
+			
 			enableOSCWorld(myParameters.getPreferenceValue(myParameters.PARAM_oscServerUrl),
 					(new Integer(myParameters.getPreferenceValue(myParameters.PARAM_oscServerPort))).intValue(),
 					(new Integer(myParameters.getPreferenceValue(myParameters.PARAM_oscListenerPort))).intValue());

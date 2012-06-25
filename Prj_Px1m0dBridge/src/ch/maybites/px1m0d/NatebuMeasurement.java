@@ -42,7 +42,7 @@ public class NatebuMeasurement extends PApplet{
 		l.moveTo(controlWindow);
 		Button s = controlP5.addButton("save",10,160,200,80,20);
 		s.moveTo(controlWindow);
-		RadioButton r = controlP5.addRadio("distance",100,20);
+		Radio r = controlP5.addRadio("distance",100,20);
 		r.deactivateAll(); // use deactiveAll to not make the first radio button active.
 		r.addItem("69",690);
 		r.addItem("66",660);

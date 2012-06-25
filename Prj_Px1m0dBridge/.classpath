@@ -7,9 +7,9 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Processing1.5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MaybitesCore"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingExt_gestaltP5"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingExt_controlP5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingExt_oscP5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingExt_proXML"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/libX_Expression"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingExt_controlP5Legacy"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
